@@ -5,9 +5,8 @@ from django.contrib.auth.models import AnonymousUser
 from django.template import Engine, RequestContext
 from django.test import RequestFactory
 from django.utils.text import smart_split
-
 from cms.toolbar.toolbar import CMSToolbar
-
+from shop.models.customer import CustomerModel
 from .conf import settings
 from .utils import (
     _get_alias_from_language_func, _get_language_from_alias_func,
@@ -111,4 +110,5 @@ def get_request(language=None):
     request.current_page = None
     request.user = AnonymousUser()
     request.toolbar = CMSToolbar(request)
+    request.customer = CustomerModel.objects.all().first()
     return request
